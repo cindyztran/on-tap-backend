@@ -64,20 +64,40 @@ app.get('/beers', async (req, res) => {
         //send error
         res.status(400).json(error);
     }
-})
+});
+
+
+//Beer Delete Route
+app.delete('/beers/:id', async (req, res) => {
+    try {
+        res.json(await Beer.findByIdAndRemove(req.params.id))
+        
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+//Beer Update Route
+app.put('/beers/:id', async (req, res) => {
+    try {
+        res.json(await Beer.findByIdAndUpdate(req.params.id, req.body, { new: true }));
+
+    } catch (error) { 
+        res.status(400).json(error);
+    }
+});
+
+
 
 //Beer Create Route
 app.post('/beers', async (req, res) => {
     try {
-        res.json(await Beer.create(req.body))
+        res.json(await Beer.create(req.body));
 
     } catch (error) {
         res.status(400).json(error);
     }
-})
-
-
-
+});
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
