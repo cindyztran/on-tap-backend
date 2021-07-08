@@ -97,7 +97,7 @@ app.get('/beers', async (req, res) => {
 
 //Beer Delete Route
 app.delete('/beers/:id', isAuthenticated, async (req, res) => {
-    try {
+    try { 
         res.json(await Beer.findByIdAndRemove(req.params.id))
 
     } catch (error) {
